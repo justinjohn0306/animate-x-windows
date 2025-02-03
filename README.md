@@ -82,8 +82,9 @@ This repository is the official implementation of paper "Animate-X: Universal Ch
 ## &#x1F680; Installation
 Install with `conda`: 
 ```bash
-conda env create -f environment.yaml
+conda create -n animate-x python=3.11
 conda activate animate-x
+pip install -r requirements.txt
 ```
 
 
