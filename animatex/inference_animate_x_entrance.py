@@ -295,7 +295,8 @@ def worker(gpu, cfg, cfg_update):
         torch.backends.cudnn.benchmark = True
         if hasattr(cfg, "CPU_CLIP_VAE") and cfg.CPU_CLIP_VAE:
             torch.backends.cudnn.benchmark = False
-        dist.init_process_group(backend='nccl', world_size=cfg.world_size, rank=cfg.rank)
+        backend = 'nccl' if sys.platform.startswith('linux') else 'gloo'
+        dist.init_process_group(backend=backend, world_size=cfg.world_size, rank=cfg.rank)
 
     # [Log] Save logging and make log dir
     log_dir = generalized_all_gather(cfg.log_dir)[0]
